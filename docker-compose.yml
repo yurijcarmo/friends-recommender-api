@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  friend-recommender-api:
+    container_name: friends-recommender-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
