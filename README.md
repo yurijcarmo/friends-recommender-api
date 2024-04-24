@@ -45,7 +45,7 @@ Isso iniciará a aplicação na porta 3000.
 
 ## Execução dos Testes Automatizados
 
-Para executar os testes automatizados, abra outra aba do terminal e execute os seguintes comandos para entrar no container Docker:
+Para executar os testes automatizados, abra outra aba do terminal e execute o seguinte comando para entrar no container Docker:
 
 `docker exec -it friends-recommender-api sh`
 
