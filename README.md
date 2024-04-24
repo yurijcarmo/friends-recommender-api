@@ -55,6 +55,10 @@ Em seguida, execute o seguinte comando dentro do container para iniciar os teste
 
 Isso iniciará a execução dos testes e garantirá que todas as funcionalidades estejam corretamente implementadas.
 
+O resultado deverá ser parecido com este:
+
+![alt text](./instructions/print-coverage.png)
+
 ## Funcionamento
 
 O sistema permite as seguintes operações:
