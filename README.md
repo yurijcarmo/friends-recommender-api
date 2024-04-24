@@ -4,7 +4,7 @@
 
 Este projeto consiste em uma API que permite que uma pessoa obtenha sugestões de novos amigos com base nas amizades já existentes. A aplicação escuta na porta 3000 e armazena os dados em memória durante a execução do servidor e não utiliza nenhum banco de dados externo.
 
-Esta API foi desenvolvida utilizando Nest.js e TypeScript, com o auxílio do framework Nest.js para simplificar o desenvolvimento. Além disso, foram implementados testes de integração e unitários utilizando o Jest.
+Esta API foi desenvolvida utilizando Node.js e TypeScript, com o auxílio do framework Nest.js para simplificar o desenvolvimento. Além disso, foram implementados testes de integração e unitários utilizando o Jest.
 
 Para mais informações sobre o Nest.js, consulte a [documentação do Nest.js](https://docs.nestjs.com/).
 
