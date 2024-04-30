@@ -41,8 +41,8 @@ describe('RelationshipService', () => {
     });
 
     it('should create a relationship and update friends mutually', () => {
-        const cpf1 = '12345678901';
-        const cpf2 = '98765432109';
+        const cpf1 = '298.462.390-74';
+        const cpf2 = '942.852.260-36';
         (personService.getPerson as jest.Mock).mockReturnValueOnce({
             cpf: cpf1,
             name: `Name for ${cpf1}`,
@@ -60,20 +60,28 @@ describe('RelationshipService', () => {
     });
 
     it('should throw BadRequestException if the relationship already exists', () => {
-        const rel1 = new RelationshipModel('12345678901', '98765432109');
+        const rel1 = new RelationshipModel(
+            '298.462.390-74', 
+            '942.852.260-36'
+        );
         service.setRelationships([rel1]);
 
         if (rel1 !== null) {
-            expect(() => service.createRelationship('12345678901', '98765432109'))
-                .toThrow(BadRequestException);
-            expect(() => service.createRelationship('98765432109', '12345678901'))
-                .toThrow(BadRequestException);
+            expect(() => service.createRelationship(
+                '298.462.390-74', 
+                '942.852.260-36'
+            )).toThrow(BadRequestException);
+
+            expect(() => service.createRelationship(
+                '942.852.260-36', 
+                '298.462.390-74'
+            )).toThrow(BadRequestException);
         }
     });
 
     it('should throw BadRequestException when attempting to create a relationship '
         + 'with the same CPFs', () => {
-            const cpf = '12345678901';
+            const cpf = '298.462.390-74';
             expect(() => service.createRelationship(cpf, cpf))
                 .toThrow(new BadRequestException(
                     'Cannot create a relationship with the same '
@@ -82,14 +90,14 @@ describe('RelationshipService', () => {
         });
 
     it('should return all current relationships', () => {
-        const rel1 = new RelationshipModel('12345678901', '98765432109');
+        const rel1 = new RelationshipModel('298.462.390-74', '942.852.260-36');
         service.setRelationships([rel1]);
         expect(service.getRelationships()).toEqual([rel1]);
     });
 
     it('should clear all relationships when setRelationships is called with an '
         + 'empty array', () => {
-            const rel1 = new RelationshipModel('12345678901', '98765432109');
+            const rel1 = new RelationshipModel('298.462.390-74', '942.852.260-36');
             service.setRelationships([rel1]);
             service.setRelationships([]);
             expect(service.getRelationships()).toEqual([]);
@@ -105,15 +113,18 @@ describe('RelationshipService', () => {
     });
 
     it('should return true if the relationship exists', () => {
-        const rel1 = new RelationshipModel('12345678901', '98765432109');
+        const rel1 = new RelationshipModel('298.462.390-74', '942.852.260-36');
         service.setRelationships([rel1]);
 
-        expect(service.hasRelationship('12345678901', '98765432109')).toBe(true);
+        expect(service.hasRelationship(
+            '298.462.390-74', 
+            '942.852.260-36')
+        ).toBe(true);
     });
 
     it('should update friends mutually when creating a relationship', () => {
-        const cpf1 = '11111111111';
-        const cpf2 = '22222222222';
+        const cpf1 = '816.596.840-92';
+        const cpf2 = '851.885.140-49';
         (personService.getPerson as jest.Mock).mockReturnValueOnce({
             cpf: cpf1,
             name: `Name for ${cpf1}`,
@@ -129,8 +140,8 @@ describe('RelationshipService', () => {
     });
 
     it('should return true if the relationship exists', () => {
-        const cpf1 = '12345678901';
-        const cpf2 = '98765432109';
+        const cpf1 = '298.462.390-74';
+        const cpf2 = '942.852.260-36';
         const rel1 = new RelationshipModel(cpf1, cpf2);
         service.setRelationships([rel1]);
 
@@ -138,6 +149,9 @@ describe('RelationshipService', () => {
     });
 
     it('should return false if the relationship does not exist', () => {
-        expect(service.hasRelationship('98765432109', '12345678901')).toBe(false);
+        expect(service.hasRelationship(
+            '942.852.260-36', 
+            '298.462.390-74'
+        )).toBe(false);
     });
 });

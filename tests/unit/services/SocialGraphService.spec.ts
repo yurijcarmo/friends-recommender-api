@@ -38,8 +38,8 @@ describe('SocialGraphService', () => {
         });
 
         personService.getPersons.mockReturnValue([
-            new PersonModel('12345678901', 'Ana'),
-            new PersonModel('10987654321', 'Carlos')
+            new PersonModel('298.462.390-74', 'Ana'),
+            new PersonModel('942.852.260-36', 'Carlos')
         ]);
 
         relationshipService.createRelationship.mockImplementation((cpf1, cpf2) => {
@@ -47,7 +47,7 @@ describe('SocialGraphService', () => {
         });
 
         relationshipService.getRelationships.mockReturnValue([
-            new RelationshipModel('12345678901', '10987654321')
+            new RelationshipModel('298.462.390-74', '942.852.260-36')
         ]);
     });
 

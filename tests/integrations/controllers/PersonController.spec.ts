@@ -64,17 +64,15 @@ describe('PersonController (integration)', () => {
             .send(invalidDto)
             .expect(400)
             .expect(res => {
-                expect(res.body.message).toContain(
-                    'The CPF must have exactly 11 digits.'
-                );
-                expect(res.body.message).toContain(
-                    'name should not be empty'
-                );
+                expect(res.body.message).toEqual([
+                    "The document number must be a valid CPF with 11 digits",
+                    "name should not be empty"
+                ]);
             });
     });
 
     it('/person/:cpf (GET) - should retrieve a person by cpf', async () => {
-        const cpf = '12345678901';
+        const cpf = '17534937060';
         await request(app.getHttpServer())
             .get(`/person/${cpf}`)
             .expect(200)
@@ -92,7 +90,7 @@ describe('PersonController (integration)', () => {
                 .expect(400)
                 .expect(res => {
                     expect(res.body.message).toContain(
-                        'The CPF must have exactly 11 digits.'
+                        'The CPF must have exactly 11 digits'
                     );
                 });
         });

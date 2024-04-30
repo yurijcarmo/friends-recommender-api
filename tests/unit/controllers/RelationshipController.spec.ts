@@ -45,7 +45,10 @@ describe('RelationshipController', () => {
 
     describe('Operations', () => {
         it('should create a relationship and return that relationship', () => {
-            const relationshipDto = { cpf1: '12345678901', cpf2: '98765432101' };
+            const relationshipDto = { 
+                cpf1: '298.462.390-74', 
+                cpf2: '942.852.260-36' 
+            };
             const result = controller.createRelationship(relationshipDto);
             expect(result).toEqual(new RelationshipModel(
                 relationshipDto.cpf1,

@@ -41,14 +41,14 @@ describe('PersonController', () => {
 
     describe('Operations', () => {
         it('should create a person and return that person', () => {
-            const personDto = { cpf: '12345678901', name: 'Test Name' };
+            const personDto = { cpf: '298.462.390-74', name: 'Test Name' };
             const result = controller.createPerson(personDto);
             expect(result).toEqual(personDto);
             expect(service.createPerson).toHaveBeenCalledWith(personDto);
         });
 
         it('should retrieve a person by cpf', () => {
-            const cpf = '12345678901';
+            const cpf = '298.462.390-74';
             const result = controller.getPerson(cpf);
             expect(result).toEqual({ cpf, name: 'Test Name' });
             expect(service.getPerson).toHaveBeenCalledWith(cpf);

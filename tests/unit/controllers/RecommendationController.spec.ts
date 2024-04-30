@@ -40,7 +40,7 @@ describe('RecommendationController', () => {
 
     describe('findByCpf', () => {
         it('should return recommendations for a given cpf', () => {
-            const cpf = '12345678901';
+            const cpf = '298.462.390-74';
             const recommendations = controller.findByCpf(cpf);
             expect(recommendations).toEqual(['Recommendation1', 'Recommendation2']);
             expect(service.getRecommendations).toHaveBeenCalledWith(cpf);
@@ -48,7 +48,7 @@ describe('RecommendationController', () => {
 
         it('should handle no recommendations found', () => {
             jest.spyOn(service, 'getRecommendations').mockReturnValueOnce([]);
-            const cpf = '12345678901';
+            const cpf = '298.462.390-74';
             const recommendations = controller.findByCpf(cpf);
             expect(recommendations).toEqual([]);
             expect(service.getRecommendations).toHaveBeenCalledWith(cpf);

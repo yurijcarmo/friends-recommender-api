@@ -40,7 +40,7 @@ describe('RecommendationController Integration', () => {
 
     it('/recommendations/:cpf (GET) - should handle cases where no recommendations '
     + 'found', async () => {
-        const cpf = '12345678901';
+        const cpf = '17534937060';
         jest.spyOn(service, 'getRecommendations').mockReturnValueOnce([]);
 
         await request(app.getHttpServer())
@@ -51,7 +51,7 @@ describe('RecommendationController Integration', () => {
 
     it('/recommendations/:cpf (GET) - should handle cases where recommendations are '
     + 'present', async () => {
-        const cpf = '12345678901';
+        const cpf = '17534937060';
         jest.spyOn(service, 'getRecommendations').mockReturnValueOnce([
             'Recommendation1',
             'Recommendation2'

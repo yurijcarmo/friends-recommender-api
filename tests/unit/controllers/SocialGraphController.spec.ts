@@ -45,19 +45,24 @@ describe('SocialGraphController', () => {
     });
 
     describe('Operations', () => {
-        it('should create random social graph data and return the model', async () => {
-            const expectedModel = new SocialGraphModel({
-                persons: [new PersonModel('123', 'Test Person')],
-                relationships: [new RelationshipModel('123', '456')]
+        it('should create random social graph data and return the model',
+            async () => {
+                const expectedModel = new SocialGraphModel({
+                    persons: [
+                        new PersonModel('298.462.390-74', 'Test Person')
+                    ],
+                    relationships: [
+                        new RelationshipModel('298.462.390-74', '942.852.260-36')
+                    ]
+                });
+
+                jest.spyOn(service, 'createRandomData').mockReturnValue(expectedModel);
+
+                const result = await controller.createRandomData();
+
+                expect(result).toBeInstanceOf(SocialGraphModel);
+                expect(result).toEqual(expectedModel);
+                expect(service.createRandomData).toHaveBeenCalled();
             });
-
-            jest.spyOn(service, 'createRandomData').mockReturnValue(expectedModel);
-
-            const result = await controller.createRandomData();
-
-            expect(result).toBeInstanceOf(SocialGraphModel);
-            expect(result).toEqual(expectedModel);
-            expect(service.createRandomData).toHaveBeenCalled();
-        });
     });
 });

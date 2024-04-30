@@ -44,7 +44,7 @@ describe('RelationshipController (integration)', () => {
     });
 
     it('/relationship (POST) - should create a relationship', async () => {
-        const relationshipDto = { cpf1: '12345678901', cpf2: '98765432101' };
+        const relationshipDto = { cpf1: '57131286010', cpf2: '32026816050' };
         await request(app.getHttpServer())
             .post('/relationship')
             .send(relationshipDto)
@@ -79,7 +79,7 @@ describe('RelationshipController (integration)', () => {
     });
 
     it('/relationship (POST) - should handle creation failure', async () => {
-        const relationshipDto = { cpf1: '99999999999', cpf2: '88888888888' };
+        const relationshipDto = { cpf1: '57131286010', cpf2: '32026816050' };
         jest.spyOn(service, 'createRelationship').mockImplementationOnce(() => {
             throw new HttpException({
                 status: HttpStatus.INTERNAL_SERVER_ERROR,
@@ -102,8 +102,8 @@ describe('RelationshipController (integration)', () => {
     it('/relationships (GET) - should return a non-empty relationship list',
         async () => {
             const relationships = [
-                new RelationshipModel('12345678901', '98765432101'),
-                new RelationshipModel('11111111111', '22222222222')
+                new RelationshipModel('57131286010', '32026816050'),
+                new RelationshipModel('09554151012', '95316904052')
             ];
             jest.spyOn(service, 'getRelationships').mockReturnValueOnce(relationships);
 
@@ -112,8 +112,8 @@ describe('RelationshipController (integration)', () => {
                 .expect(200)
                 .expect(res => {
                     expect(res.body.length).toBe(2);
-                    expect(res.body[0].cpf1).toBe('12345678901');
-                    expect(res.body[1].cpf1).toBe('11111111111');
+                    expect(res.body[0].cpf1).toBe('57131286010');
+                    expect(res.body[1].cpf1).toBe('09554151012');
                 });
         });
 });

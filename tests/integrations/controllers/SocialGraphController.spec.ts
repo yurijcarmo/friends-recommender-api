@@ -30,10 +30,10 @@ describe('SocialGraphController (integration)', () => {
                     useValue: {
                         createRandomData: jest.fn().mockImplementation(() => {
                             return new SocialGraphModel({
-                                persons: [new PersonModel("1234567890", "Alice")],
+                                persons: [new PersonModel("298.462.390-74", "Alice")],
                                 relationships: [new RelationshipModel(
-                                    "1234567890", 
-                                    "0987654321"
+                                    "298.462.390-74", 
+                                    "942.852.260-36"
                                 )] 
                             });
                         })

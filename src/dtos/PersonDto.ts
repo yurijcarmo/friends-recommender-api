@@ -1,14 +1,15 @@
+import { CpfValidator } from '../validators';
 import {
     IsNotEmpty,
     IsString,
-    Length
+    Validate
 } from 'class-validator';
 
 export class PersonDto {
 
     @IsString()
     @IsNotEmpty()
-    @Length(11, 11, {message: 'The CPF must have exactly 11 digits.'})
+    @Validate(CpfValidator)
     cpf: string;
 
     @IsString()

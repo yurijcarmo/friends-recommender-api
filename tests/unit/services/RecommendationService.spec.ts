@@ -34,38 +34,38 @@ describe('RecommendationService', () => {
 
     function setupPersons() {
         const ana = new PersonModel(
-            '11111111111', 
+            '298.462.390-74',
             'Ana', 
-            ['22222222222']
+            ['942.852.260-36']
         );
         const bruno = new PersonModel(
-            '22222222222', 
+            '942.852.260-36',
             'Bruno', 
-            ['11111111111', '33333333333', '44444444444']
+            ['298.462.390-74', '816.596.840-92', '851.885.140-49']
         );
         const carlos = new PersonModel(
-            '33333333333', 
+            '816.596.840-92',
             'Carlos', 
-            ['22222222222']
+            ['942.852.260-36']
         );
         const daniel = new PersonModel(
-            '44444444444', 
+            '851.885.140-49',
             'Daniel', 
-            ['22222222222', '55555555555']
+            ['942.852.260-36', '122.462.380-03']
         );
         const elisa = new PersonModel(
-            '55555555555', 
+            '122.462.380-03',
             'Elisa', 
-            ['44444444444']
+            ['851.885.140-49']
         );
 
         personService.getPerson.mockImplementation(cpf => {
             switch (cpf) {
-                case '11111111111': return ana;
-                case '22222222222': return bruno;
-                case '33333333333': return carlos;
-                case '44444444444': return daniel;
-                case '55555555555': return elisa;
+                case '298.462.390-74': return ana;
+                case '942.852.260-36': return bruno;
+                case '816.596.840-92': return carlos;
+                case '851.885.140-49': return daniel;
+                case '122.462.380-03': return elisa;
                 default: throw new NotFoundException(
                     `Person not found for CPF: ${cpf}`
                 );
@@ -75,15 +75,15 @@ describe('RecommendationService', () => {
 
     it('should provide recommendations based on friends of friends', () => {
         setupPersons();
-        const recommendations = service.getRecommendations('11111111111');
-        expect(recommendations).toEqual(['33333333333', '44444444444']);
+        const recommendations = service.getRecommendations('298.462.390-74');
+        expect(recommendations).toEqual(['816.596.840-92', '851.885.140-49']);
         expect(personService.getPerson).toHaveBeenCalledTimes(4);
     });
 
     it('should return an empty list when the person has no friends', () => {
-        const lonelyPerson = new PersonModel('11111111111', 'Ana', []);
+        const lonelyPerson = new PersonModel('298.462.390-74', 'Ana', []);
         personService.getPerson.mockReturnValue(lonelyPerson);
-        const recommendations = service.getRecommendations('11111111111');
+        const recommendations = service.getRecommendations('298.462.390-74');
         expect(recommendations).toEqual([]);
     });
 
@@ -91,56 +91,56 @@ describe('RecommendationService', () => {
         personService.getPerson.mockImplementation(() => {
             throw new NotFoundException('Person not found');
         });
-        expect(() => service.getRecommendations('11111111111')).toThrow(
+        expect(() => service.getRecommendations('298.462.390-74')).toThrow(
             new NotFoundException('Failed to get recommendations: Person not found')
         );
     });
 
     it('should sort recommendations by the number of common friends', () => {
         setupPersons();
-        const recommendations = service.getRecommendations('11111111111');
-        expect(recommendations).toEqual(['33333333333', '44444444444']);
-        expect(recommendations[0]).toBe('33333333333');
+        const recommendations = service.getRecommendations('298.462.390-74');
+        expect(recommendations).toEqual(['816.596.840-92', '851.885.140-49']);
+        expect(recommendations[0]).toBe('816.596.840-92');
     });
 
     it('should eliminate duplicate friends in recommendations from multiple '
     + 'layers of friends', () => {
         setupPersons();
-        const recommendations = service.getRecommendations('11111111111');
-        expect(recommendations).toEqual(['33333333333', '44444444444']);
+        const recommendations = service.getRecommendations('298.462.390-74');
+        expect(recommendations).toEqual(['816.596.840-92', '851.885.140-49']);
         expect(personService.getPerson).toHaveBeenCalledTimes(4);
     });
 
     it('should count zero common friends when there are no intersecting '
     + 'friendships', () => {
         const ana = new PersonModel(
-            '11111111111', 
+            '298.462.390-74', 
             'Ana', 
-            ['22222222222', '33333333333']
+            ['942.852.260-36', '816.596.840-92']
         );
         const bruno = new PersonModel(
-            '22222222222', 
+            '942.852.260-36', 
             'Bruno', 
-            ['11111111111', '44444444444']
+            ['298.462.390-74', '851.885.140-49']
         );
         const carlos = new PersonModel(
-            '33333333333', 
+            '816.596.840-92', 
             'Carlos', 
-            ['11111111111', '55555555555']
+            ['298.462.390-74', '122.462.380-03']
         );
 
         personService.getPerson.mockImplementation(cpf => {
             switch (cpf) {
-                case '11111111111': return ana;
-                case '22222222222': return bruno;
-                case '33333333333': return carlos;
+                case '298.462.390-74': return ana;
+                case '942.852.260-36': return bruno;
+                case '816.596.840-92': return carlos;
                 default: return new PersonModel(cpf, "Unknown", []);
             }
         });
 
-        const recommendations = service.getRecommendations('33333333333');
+        const recommendations = service.getRecommendations('816.596.840-92');
 
-        expect(recommendations).toEqual(['22222222222']);
+        expect(recommendations).toEqual(['942.852.260-36']);
         expect(personService.getPerson).toHaveBeenCalledTimes(4);
     });
 });
